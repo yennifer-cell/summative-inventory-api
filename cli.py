@@ -26,8 +26,9 @@ def print_menu():
     print("4. Update item")
     print("5. Delete item")
     print("6. Find external product by barcode")
-    print("7. Add product from barcode")
-    print("8. Exit")
+    print("7. Find external product by name")
+    print("8. Add product from barcode")
+    print("9. Exit")
 
 
 def run_cli():
@@ -63,18 +64,39 @@ def run_cli():
 
             elif choice == "4":
                 item_id = int(input("Item id: ").strip())
-                field = input("Field to update (name/brand/quantity/price/barcode): ").strip()
-                raw_value = input("New value: ").strip()
+                print("Enter new values (leave blank to skip a field):")
 
-                if field == "quantity":
-                    value = int(raw_value)
-                elif field == "price":
-                    value = float(raw_value)
+                payload = {}
+
+                name = input("Name: ").strip()
+                if name:
+                    payload["name"] = name
+
+                brand = input("Brand: ").strip()
+                if brand:
+                    payload["brand"] = brand
+
+                quantity_str = input("Quantity: ").strip()
+                if quantity_str:
+                    payload["quantity"] = int(quantity_str)
+
+                price_str = input("Price: ").strip()
+                if price_str:
+                    payload["price"] = float(price_str)
+
+                barcode = input("Barcode: ").strip()
+                if barcode:
+                    payload["barcode"] = barcode
+
+                ingredients = input("Ingredients: ").strip()
+                if ingredients:
+                    payload["ingredients"] = ingredients
+
+                if not payload:
+                    print("No fields to update.")
                 else:
-                    value = raw_value
-
-                status, data = request_json("PATCH", f"/inventory/{item_id}", {field: value})
-                print(status, data)
+                    status, data = request_json("PATCH", f"/inventory/{item_id}", payload)
+                    print(status, data)
 
             elif choice == "5":
                 item_id = int(input("Item id: ").strip())
@@ -87,12 +109,20 @@ def run_cli():
                 print(status, data)
 
             elif choice == "7":
+                name = input("Product name to search: ").strip()
+                if not name:
+                    print("Name cannot be empty.")
+                else:
+                    status, data = request_json("GET", f"/external/search?name={name}")
+                    print(status, data)
+
+            elif choice == "8":
                 barcode = input("Barcode: ").strip()
                 quantity = int(input("Quantity to add: ").strip())
                 status, data = request_json("POST", f"/inventory/from-barcode/{barcode}", {"quantity": quantity})
                 print(status, data)
 
-            elif choice == "8":
+            elif choice == "9":
                 print("Goodbye")
                 break
 
