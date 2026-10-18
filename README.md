@@ -28,7 +28,7 @@ summative-inventory-api/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/kashik09/summative-inventory-api.git
+git clone https://github.com/yennifer-cell/summative-inventory-api.git
 cd summative-inventory-api
 ```
 

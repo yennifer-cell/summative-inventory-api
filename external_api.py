@@ -5,7 +5,7 @@ SEARCH_URL = "https://world.openfoodfacts.org/cgi/search.pl"
 
 # Required headers for OpenFoodFacts API
 HEADERS = {
-    "User-Agent": "InventoryManagementSystem/1.0 (https://github.com/kashik09/summative-inventory-api)"
+    "User-Agent": "InventoryManagementSystem/1.0 (https://github.com/yennifer-cell/summative-inventory-api)"
 }
 
 
