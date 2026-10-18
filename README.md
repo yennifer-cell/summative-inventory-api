@@ -50,7 +50,7 @@ Start the Flask server:
 python app.py
 ```
 
-The API runs on `http://127.0.0.1:5000` by default.
+The API runs on `http://127.0.0.1:8000` by default.
 
 ## API Endpoints
 
@@ -70,26 +70,26 @@ The API runs on `http://127.0.0.1:5000` by default.
 
 ### Create an item
 ```bash
-curl -X POST http://127.0.0.1:5000/inventory \
+curl -X POST http://127.0.0.1:8000/inventory \
   -H "Content-Type: application/json" \
   -d '{"name": "Organic Almond Milk", "brand": "Silk", "quantity": 12, "price": 3.99}'
 ```
 
 ### Update multiple fields
 ```bash
-curl -X PATCH http://127.0.0.1:5000/inventory/1 \
+curl -X PATCH http://127.0.0.1:8000/inventory/1 \
   -H "Content-Type: application/json" \
   -d '{"name": "Updated Name", "quantity": 20, "price": 4.99}'
 ```
 
 ### Lookup product by barcode
 ```bash
-curl http://127.0.0.1:5000/external/barcode/737628064502
+curl http://127.0.0.1:8000/external/barcode/737628064502
 ```
 
 ### Search product by name
 ```bash
-curl "http://127.0.0.1:5000/external/search?name=almond%20milk"
+curl "http://127.0.0.1:8000/external/search?name=almond%20milk"
 ```
 
 ## CLI Usage
